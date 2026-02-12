@@ -1460,6 +1460,104 @@
             height: 12px;
         }
 
+        /* ===== PROJECTS ===== */
+        #projects {
+            background: var(--bg-secondary);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent);
+        }
+
+        .project-preview {
+            height: 180px;
+            background: var(--gradient-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-preview::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 60%);
+        }
+
+        .project-body {
+            padding: 1.5rem;
+        }
+
+        .project-body h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-body p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-tags span {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            padding: 0.2rem 0.55rem;
+            border-radius: 5px;
+            background: var(--accent-light);
+            color: var(--accent-dark);
+        }
+
+        .project-link {
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--accent-dark);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .project-link svg {
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-link svg {
+            transform: translateX(3px);
+        }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             .nav-links {
@@ -2126,6 +2224,35 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+        <div class="section-inner">
+            <div class="section-header fade-in">
+                <p class="section-label">// Projects</p>
+                <h2 class="section-title">Featured Work</h2>
+            </div>
+            <div class="projects-grid">
+                <a href="dashboard/index.html" class="project-card fade-in">
+                    <div class="project-preview">&#128202;</div>
+                    <div class="project-body">
+                        <h3>Customer Care Operations Dashboard</h3>
+                        <p>Interactive dashboard analyzing 8,469 support tickets across 42 products &mdash; tracking KPIs like CSAT, resolution rate, channel performance, and ticket volume trends.</p>
+                        <div class="project-tags">
+                            <span>Chart.js</span>
+                            <span>Python</span>
+                            <span>Data Analysis</span>
+                            <span>HTML/CSS/JS</span>
+                        </div>
+                        <div class="project-link">
+                            View Dashboard
+                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
