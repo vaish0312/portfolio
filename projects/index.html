@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Vaishnavi Patil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #fbf8fd;
+            --bg-secondary: #f4eff9;
+            --bg-card: #ffffff;
+            --text-primary: #1e1730;
+            --text-secondary: #5d5073;
+            --text-muted: #918599;
+            --accent: #c9789d;
+            --accent-light: #f3dbe6;
+            --accent-dark: #a85d80;
+            --accent-secondary: #8b6bb5;
+            --border: #e8dff2;
+            --gradient-1: linear-gradient(135deg, #c9789d, #8b6bb5);
+            --shadow-sm: 0 2px 8px rgba(30, 23, 48, 0.06);
+            --shadow-md: 0 8px 30px rgba(30, 23, 48, 0.08);
+            --shadow-lg: 0 16px 50px rgba(30, 23, 48, 0.1);
+        }
+
+        html { scroll-behavior: smooth; font-size: 16px; }
+
+        body {
+            font-family: 'Lora', Georgia, serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+        /* ===== HEADER ===== */
+        .page-header {
+            padding: 2rem 2rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .back-nav {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            text-decoration: none;
+            color: var(--accent-dark);
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-bottom: 2.5rem;
+        }
+
+        .back-nav:hover {
+            gap: 0.6rem;
+        }
+
+        .back-nav svg {
+            transition: transform 0.3s ease;
+        }
+
+        .back-nav:hover svg {
+            transform: translateX(-3px);
+        }
+
+        .page-hero {
+            padding: 2rem 2rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.75rem;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            line-height: 1.7;
+        }
+
+        /* ===== SECTION ===== */
+        .section {
+            padding: 0 2rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        /* ===== PROJECT CARDS ===== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.75rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent);
+        }
+
+        .project-preview {
+            height: 190px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-preview.gradient-1 { background: linear-gradient(135deg, #c9789d, #8b6bb5); }
+        .project-preview.gradient-2 { background: linear-gradient(135deg, #8b6bb5, #6b8fd4); }
+        .project-preview.gradient-3 { background: linear-gradient(135deg, #5cb88a, #6b8fd4); }
+
+        .project-preview::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 60%);
+        }
+
+        .project-status {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            font-weight: 500;
+            padding: 0.25rem 0.6rem;
+            border-radius: 100px;
+            z-index: 1;
+        }
+
+        .project-status.live {
+            background: rgba(92, 184, 138, 0.9);
+            color: #fff;
+        }
+
+        .project-status.coming {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--text-muted);
+        }
+
+        .project-body {
+            padding: 1.75rem;
+        }
+
+        .project-body h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+        }
+
+        .project-body p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin-bottom: 1.25rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .project-tags span {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            padding: 0.25rem 0.55rem;
+            border-radius: 6px;
+            background: var(--accent-light);
+            color: var(--accent-dark);
+        }
+
+        .project-link-row {
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--accent-dark);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .project-link-row svg {
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-link-row svg {
+            transform: translateX(4px);
+        }
+
+        /* Coming soon card */
+        .project-card.coming-soon {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .project-card.coming-soon .project-body h3 {
+            color: var(--text-muted);
+        }
+
+        /* ===== BLOG CARDS ===== */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .blog-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.75rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent);
+        }
+
+        .blog-card.coming-soon {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .blog-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .blog-category {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            font-weight: 500;
+            padding: 0.2rem 0.55rem;
+            border-radius: 100px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .blog-category.analytics { background: var(--accent-light); color: var(--accent-dark); }
+        .blog-category.tutorial { background: rgba(139, 107, 181, 0.12); color: var(--accent-secondary); }
+        .blog-category.career { background: rgba(92, 184, 138, 0.12); color: #4a9e74; }
+
+        .blog-date {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        .blog-card h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.08rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .blog-card p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .blog-read-more {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--accent-dark);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .blog-read-more svg {
+            transition: transform 0.3s ease;
+        }
+
+        .blog-card:hover .blog-read-more svg {
+            transform: translateX(3px);
+        }
+
+        /* ===== FOOTER ===== */
+        .page-footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .page-footer a {
+            color: var(--accent-dark);
+            text-decoration: none;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .projects-grid, .blog-grid { grid-template-columns: 1fr; }
+            .page-hero { padding: 1.5rem 1.5rem 3rem; }
+            .section { padding: 0 1.5rem 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-header">
+        <a href="../index.html" class="back-nav">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Back to Portfolio
+        </a>
+    </div>
+
+    <div class="page-hero">
+        <p class="page-label">// My Work</p>
+        <h1 class="page-title">Projects &amp; Insights</h1>
+        <p class="page-subtitle">A collection of dashboards, data analysis projects, and write-ups on topics I care about &mdash; from customer analytics to operational intelligence.</p>
+    </div>
+
+    <!-- Dashboards -->
+    <div class="section">
+        <p class="section-label">Dashboards</p>
+        <h2 class="section-title">Interactive Visualizations</h2>
+        <div class="projects-grid">
+
+            <!-- Dashboard 1: Customer Care -->
+            <a href="../dashboard/index.html" class="project-card fade-up">
+                <div class="project-preview gradient-1">
+                    <span class="project-status live">LIVE</span>
+                    &#128202;
+                </div>
+                <div class="project-body">
+                    <h3>Customer Care Operations Dashboard</h3>
+                    <p>Analyzed 8,469 support tickets across 42 products. Tracks CSAT, resolution rate, channel performance, priority breakdowns, and monthly volume trends.</p>
+                    <div class="project-tags">
+                        <span>Chart.js</span>
+                        <span>Python</span>
+                        <span>Data Analysis</span>
+                        <span>HTML/CSS/JS</span>
+                    </div>
+                    <div class="project-link-row">
+                        View Dashboard
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Dashboard 2: Coming Soon -->
+            <div class="project-card coming-soon fade-up">
+                <div class="project-preview gradient-2">
+                    <span class="project-status coming">COMING SOON</span>
+                    &#9889;
+                </div>
+                <div class="project-body">
+                    <h3>Energy &amp; Utilities Analytics</h3>
+                    <p>Operational KPI dashboard for energy consumption patterns, outage analysis, and capacity planning using public utility data.</p>
+                    <div class="project-tags">
+                        <span>Power BI</span>
+                        <span>Python</span>
+                        <span>SQL</span>
+                    </div>
+                    <div class="project-link-row">Coming Soon</div>
+                </div>
+            </div>
+
+            <!-- Dashboard 3: Coming Soon -->
+            <div class="project-card coming-soon fade-up">
+                <div class="project-preview gradient-3">
+                    <span class="project-status coming">COMING SOON</span>
+                    &#128176;
+                </div>
+                <div class="project-body">
+                    <h3>Customer Churn Prediction</h3>
+                    <p>End-to-end ML pipeline predicting customer churn with interactive visualizations of key churn drivers and retention strategies.</p>
+                    <div class="project-tags">
+                        <span>Scikit-learn</span>
+                        <span>Tableau</span>
+                        <span>Python</span>
+                    </div>
+                    <div class="project-link-row">Coming Soon</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Blog / Write-ups -->
+    <div class="section">
+        <p class="section-label">Blog</p>
+        <h2 class="section-title">Insights &amp; Write-ups</h2>
+        <div class="blog-grid">
+
+            <!-- Blog 1: Coming Soon -->
+            <div class="blog-card coming-soon fade-up">
+                <div class="blog-meta">
+                    <span class="blog-category analytics">Analytics</span>
+                    <span class="blog-date">Coming Soon</span>
+                </div>
+                <h3>How I Built a 28-KPI Executive Dashboard</h3>
+                <p>A behind-the-scenes look at designing an executive Power BI dashboard that eliminated manual reporting for 24 data stewards.</p>
+                <div class="blog-read-more">Coming Soon</div>
+            </div>
+
+            <!-- Blog 2: Coming Soon -->
+            <div class="blog-card coming-soon fade-up">
+                <div class="blog-meta">
+                    <span class="blog-category tutorial">Tutorial</span>
+                    <span class="blog-date">Coming Soon</span>
+                </div>
+                <h3>Forecasting Call Volume with Azure ML</h3>
+                <p>Step-by-step walkthrough of building a call volume forecasting model that reduced late staffing decisions by 40%.</p>
+                <div class="blog-read-more">Coming Soon</div>
+            </div>
+
+            <!-- Blog 3: Coming Soon -->
+            <div class="blog-card coming-soon fade-up">
+                <div class="blog-meta">
+                    <span class="blog-category career">Career</span>
+                    <span class="blog-date">Coming Soon</span>
+                </div>
+                <h3>From Electronics to Data Science</h3>
+                <p>My journey from a B.Tech in Electronics to becoming a Quantitative Analyst &mdash; lessons, pivots, and what I'd do differently.</p>
+                <div class="blog-read-more">Coming Soon</div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="page-footer">
+        <p>&copy; 2026 <a href="../index.html">Vaishnavi Patil</a>. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Fade-in on scroll
+        const fadeEls = document.querySelectorAll('.fade-up');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        fadeEls.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
